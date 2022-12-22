@@ -1,0 +1,56 @@
+<div class="container">
+    <br><br><br><br><br>    
+    <div class="row">
+        <div class="col-md-5 offset-md-3"> 
+            <p-card>
+                <ng-template pTemplate="header">
+                    <div class="row">
+                        <div class="col-md-4 offset-md-1 movie-raised-button">
+                            <button pButton pRipple type="button" (click)="AdminLogin(login)" label="Admin Login" class="p-button-raised p-button-secondary"></button>
+                        </div>
+                        <div class="col-md-4 offset-md-1 movie-raised-button">
+                            <button pButton pRipple type="button" (click)="UserLogin(login)" label="Login" class="p-button-raised p-button-primary"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <form #login="ngForm">
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col movie-textbox">
+                                <input [class.is-invalid]="username?.invalid && username?.touched" #username="ngModel" 
+                                type="text" placeholder="Username" [required]="true" name="userName" pInputText [(ngModel)]="Username"/>
+                                <div *ngIf="(username?.invalid && username?.touched) || username?.dirty">
+                                    <small *ngIf="username.errors?.required" class="text-danger">
+                                    User Name is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col movie-textbox">
+                                <input [class.is-invalid]="password?.invalid && password?.touched" #password="ngModel" 
+                                type="password" placeholder="Password" [required]="true" name="passWord" pInputText [(ngModel)]="Password"/>
+                                <div *ngIf="(password?.invalid && password?.touched) || password?.dirty">
+                                    <small *ngIf="password.errors?.required" class="text-danger">
+                                    Password is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3 movie-raised-button" *ngIf="!Admin">
+                                <button [disabled]="!(login.form.valid) || !(login.dirty)" 
+                                pButton pRipple type="button" (click)="Login()" label="Login" class="p-button-raised"></button>
+                            </div>
+                            <div class="col-md-6 offset-md-3 movie-raised-button" *ngIf="Admin">
+                                <button [disabled]="!(login.form.valid) || !(login.dirty)" 
+                                pButton pRipple type="button" (click)="ValidateAdmin()" label="Admin Login" class="p-button-raised"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </p-card>
+            <div class="alert alert-danger mt-4" role="alert" *ngIf="loginClicked">
+                {{message}}
+            </div>
+        </div>
+    </div>
+</div>

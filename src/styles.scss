@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+
+.movie-textbox{
+    .p-inputtext{
+        width: 100% !important;
+    }
+}
+
+.movie-raised-button{
+    .p-button.p-button-raised{
+        width: 100% !important;
+    }
+}
+
+.HomeComponent{
+    .p-chip{
+        cursor: pointer !important;
+    }
+}
+
+
+.p-card {
+    background: #ffffff;
+    color: #212529;
+    box-shadow: 0 2px 10px -1px rgb(0 0 0 / 20%), 0 3px 1px 0 rgb(0 0 0 / 14%), 0 5px 3px 0 rgb(0 0 0 / 12%) !important;
+    border-radius: 4px;
+}
+
+.p-dialog .p-dialog-header {
+    background: #783a87 !important;
+    color: white !important;
+}
+
+.pi{
+    color: red !important;
+}

@@ -1,0 +1,98 @@
+<div class="container" >
+  <div class="card mt-5" style="align-items: center; color: blue;">
+    <h1>Post Your Comment</h1>
+  </div>
+
+  <div class="col-md-5 movie-textbox" style="padding: 20px;">
+    <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+      <div class="form-group">
+        <label for="moviename">Name :</label>
+        <input type="text" #moviename (ngModel)="moviename" name="moviename" id="moviename" class="form-control" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="review">Comment  :</label>
+        
+        <textarea input type="text" #review (ngModel)="review" name="review" id="review" class="form-control"
+        
+          placeholder="Comment">
+        </textarea>
+        
+      </div>
+      <!-- <div class="form-group">
+        <label for="rating">Movie Rating :</label>
+        <input type="number" #rating (ngModel)="rating" name="rating" id="rating" class="form-control"
+          placeholder="Movie Rating">
+      </div> -->
+      <div class="form-group">
+        <input type="submit" value="Submit Comment" class="btn btn-primary w-100">
+      </div>
+    </form>
+  </div>
+
+  <div class="mt-5">
+    <h2>Posted Comments :-</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>C_no</th>
+          <th>Name</th>
+          <th>Comment</th>
+          <!-- <th>Rating</th> -->
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody class="tbody">
+        <tr *ngFor="let review of reviewDetails">
+          <td>{{review.r_no}}</td>
+          <td>{{review.moviename}}</td>
+          <td>{{review.review}}</td>
+          <!-- <td>{{review.rating}}</td> -->
+          <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="edit(review)">Edit</button></td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteReview(review)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateReview()">
+          <div class="form-group">
+            <label for="r_no">Review R_no :</label>
+            <input type="text" disabled #r_no [(ngModel)]="reviewToUpdate.r_no" name="r_no" id="r_no"
+              class="form-control" placeholder="Review R_no">
+          </div>
+          <div class="form-group">
+            <label for="moviename">Movie Name :</label>
+            <input type="text" #moviename [(ngModel)]="reviewToUpdate.moviename" name="moviename" id="moviename" class="form-control"
+              placeholder="Movie Name">
+          </div>
+          <div class="form-group">
+            <label for="review">Movie Review :</label>
+            <input type="text" #review [(ngModel)]="reviewToUpdate.review" name="review" id="review"
+              class="form-control" placeholder="Movie Review">
+          </div>
+          <div class="form-group">
+            <label for="rating">Movie Rating :</label>
+            <input type="number" #rating [(ngModel)]="reviewToUpdate.rating" name="rating" id="rating"
+              class="form-control" placeholder="Movie Rating">
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary w-100" >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

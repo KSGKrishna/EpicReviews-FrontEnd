@@ -1,0 +1,69 @@
+<div class="container"> 
+    <br><br><br>    
+    <div class="row">
+        <div class="col-md-5 offset-md-3">
+            <p-card>
+                <ng-template pTemplate="header">
+                    <h1 class="text-center">Register</h1>
+                </ng-template>
+                <form #register="ngForm">
+                    <div class="container">
+                        <div class="row mb-4">
+                            <div class="col movie-textbox">
+                                <input [class.is-invalid]="firstname?.invalid && firstname?.touched" #firstname="ngModel"
+                                type="text" placeholder="Firstname" [required]="true" pInputText [(ngModel)]="Firstname" name="firstname"/>
+                                <div *ngIf="(firstname?.invalid && firstname?.touched) || firstname?.dirty">
+                                    <small *ngIf="firstname.errors?.required" class="text-danger">
+                                    First Name is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col movie-textbox">
+                                <input [class.is-invalid]="lastname?.invalid && lastname?.touched" #lastname="ngModel"
+                                type="text" placeholder="Lastname" name="lastname" [required]="true" pInputText [(ngModel)]="Lastname"/>
+                                <div *ngIf="(lastname?.invalid && lastname?.touched) || lastname?.dirty">
+                                    <small *ngIf="lastname.errors?.required" class="text-danger">
+                                    Last Name is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col movie-textbox">
+                                <input [class.is-invalid]="username?.invalid && username?.touched" #username="ngModel" 
+                                type="text" placeholder="Email/Username" [required]="true" name="username" pInputText [(ngModel)]="email"/>
+                                <div *ngIf="(username?.invalid && username?.touched) || username?.dirty">
+                                    <small *ngIf="username.errors?.required" class="text-danger">
+                                    User Name is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col movie-textbox">
+                                <input [class.is-invalid]="PassWord?.invalid && PassWord?.touched" #PassWord="ngModel" 
+                                type="password" placeholder="Password" [required]="true" name="password" pInputText [(ngModel)]="password"/>
+                                <div *ngIf="(PassWord?.invalid && PassWord?.touched) || PassWord?.dirty">
+                                    <small *ngIf="PassWord.errors?.required" class="text-danger">
+                                    Password is required</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3 movie-raised-button">
+                                <button [disabled]="!(register.form.valid) || !(register.dirty)" 
+                                pButton pRipple type="button" (click)="Register()" label="Register" class="p-button-raised"></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </p-card>
+            <div class="alert alert-success mt-4" role="alert" *ngIf="UserRegistration && RegistrationInitiated">
+                User Registration is Successful !
+            </div>
+            <div class="alert alert-danger mt-4" role="alert" *ngIf="!UserRegistration && RegistrationInitiated">
+                User Registration is Failed.
+            </div>
+        </div>
+    </div>
+</div>

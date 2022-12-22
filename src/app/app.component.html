@@ -1,0 +1,29 @@
+<nav class="navbar-expand-lg  navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="">Epic Reviews </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <form class="form-inline " #form="ngForm">
+      <input class="mr-2" [(ngModel)]="searchString" name="search" type="text" placeholder="Search" pInputText />
+        <button pButton pRipple type="submit" (click)="SearchMovies()" label="Search" class="p-button-raised p-button-primary"></button>
+    </form>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item mt-1 mr-4" *ngIf="Username!=''">
+          <h5 class="text-white">Hello {{Username}}</h5>
+        </li>
+        <li class="nav-item" *ngIf="Username==''">
+            <button class="btn btn-primary my-2 my-sm-0 mr-sm-2" type="submit" routerLink="/login">Login</button>
+        </li>
+        <li class="nav-item" *ngIf="Username!=''">
+          <button class="btn btn-danger my-2 my-sm-0 mr-sm-2" (click)="Logout()" type="submit">Logout</button>
+      </li>
+        <li class="nav-item" *ngIf="Username==''">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" routerLink="/register">Register</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Header end -->
+  <router-outlet></router-outlet>

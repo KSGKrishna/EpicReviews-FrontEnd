@@ -1,0 +1,37 @@
+<div class=" HomeComponent">
+    <div class="row">
+        <div class="col">
+            <p-carousel [value]="Movies" styleClass="custom-carousel" [numVisible]="1" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+                <ng-template pTemplate="header">
+                    <h5 class="text-center">Popular This Week</h5>
+                </ng-template>
+                <ng-template let-movie pTemplate="item">
+                    <div class="product-item text-center">
+                        <div class="product-item-content">
+                            <div class="">
+                                <img src="assets/caurosal/{{movie.image}}" width={{movie.width}} height="400px" [alt]="movie.name" class="product-image" />
+                            </div>                    
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+        </div>
+    </div>
+    <p-divider></p-divider>
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-2">
+                <h5>Genres : </h5>
+            </div>
+            <div class="flex align-items-center"  *ngFor="let item of Genre">
+                <p-chip (click)="ShowMovies(item)" label={{item}} styleClass="mr-2"></p-chip>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h5>All Movies : </h5>
+            </div>
+            <p-chip (click)="ShowMovies('All')" label="All Movies" styleClass="mr-2"></p-chip>
+        </div>
+    </div>
+</div>

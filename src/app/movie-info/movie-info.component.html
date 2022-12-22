@@ -1,0 +1,147 @@
+<div class="movieinfo container">
+    <br>
+    <p-toast position="bottom-right"></p-toast>
+    <p-card>
+        <div class="row">
+            <div class="col-md-5">
+                <img src="{{movieinfo.poster}}" 
+                height="440px" width="370px" alt="{{movieinfo.title}}" style="cursor: pointer; border-radius: 8px;">
+            </div>
+            <div class="col">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                        <h2 style="color: #222539;">{{movieinfo.title}}</h2>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-1">
+                        <i class="pi pi-star-fill" style="font-size: 30px;color: #f84464;"></i>
+                        </div>
+                        <div class="col-md-2">
+                        <h4>{{movieinfo.imdb_rating}}/10</h4>
+                        </div>
+                        <div class="col-md-3 pt-1">
+                             {{(reviews).length}} ratings 
+                        </div>
+                    </div>
+                    <div class="row mt-3 ml-1">
+                        <div *ngFor="let i of movieinfo.genre">
+                            <p-chip label={{i}} styleClass="mr-2"></p-chip>
+                        </div>
+                    </div>
+                    <div class="row mt-3 ml-1">
+                        <h5>Runtime : {{movieinfo.runtime}}</h5>
+                    </div>
+                    <div class="row mt-3 ml-1">
+                        <h5>Release : {{movieinfo.released}}</h5>
+                    </div>
+                    <div class="row mt-3 ml-1">
+                        <div *ngFor="let i of movieinfo.language">
+                            <p-chip label={{i}} styleClass="mr-2 bg-info"></p-chip>
+                        </div>
+                    </div>
+                    <div class="row mt-3 ml-1">
+                        <h5 style="margin-right: 5px;">Country :</h5>
+                        <div *ngFor="let i of movieinfo.country">
+                            <p-chip label={{i}} styleClass="mr-2 bg-secondary text-white"></p-chip>
+                        </div>
+                    </div>
+                    <!-- <div class="row mt-3">
+                        <div class="col-md-4 movie-raised-button">
+                            <button pButton pRipple type="button" label="Book Tickets" class="p-button-raised"></button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </p-card>
+
+    <p-divider></p-divider>
+    <h2>About the movie </h2>
+    <p>{{movieinfo.plot}}</p>
+    <p-divider></p-divider>
+
+    <h2>Cast</h2>
+    <div class="row">
+        <div *ngFor="let i of movieinfo.actors">
+            <p-chip label={{i}} styleClass="mr-2 bg-secondary text-white mb-2"></p-chip>
+        </div>
+    </div>
+    
+    <p-divider></p-divider>
+    <h2>Crew</h2>
+    <div class="row mb-4">
+        <div *ngFor="let i of movieinfo.director">
+            <p-chip label={{i}} styleClass="mr-2 bg-secondary text-white mb-2"></p-chip>
+        </div>
+        <div *ngFor="let i of movieinfo.writer">
+            <p-chip label={{i}} styleClass="mr-2 bg-secondary text-white mb-2"></p-chip>
+        </div>
+    </div>
+
+     <p-divider></p-divider>
+    <div *ngIf="Userloggedin">
+        <h2>Write your review</h2>
+        <div class="row">
+            
+            <div class="col-md-3 movie-textbox">
+                <input type="text" placeholder="Name" (ngModelChange)="DataChanged()" [(ngModel)]="Name" pInputText />
+            </div>
+            <h6 class="mt-2">Rating :</h6>
+
+            <div class="col-md-8 mt-2">
+                <p-radioButton class="mr-1" name="rating" value="1" (ngModelChange)="DataChanged()" [(ngModel)]="rating" inputId="1"></p-radioButton>
+                <p-radioButton class="mr-1" name="rating" value="2" (ngModelChange)="DataChanged()" [(ngModel)]="rating" inputId="2"></p-radioButton>
+                <p-radioButton class="mr-1" name="rating" value="3" (ngModelChange)="DataChanged()" [(ngModel)]="rating" inputId="3"></p-radioButton>
+                <p-radioButton class="mr-1" name="rating" value="4" (ngModelChange)="DataChanged()" [(ngModel)]="rating" inputId="4"></p-radioButton>
+                <p-radioButton class="mr-1" name="rating" value="5" (ngModelChange)="DataChanged()" [(ngModel)]="rating" inputId="5"></p-radioButton>
+
+            </div>
+        </div>
+        <div class="row mt-4 ml-1">
+            <span class="p-float-label">
+                <textarea id="float-input" rows="5" cols="100" pInputTextarea (ngModelChange)="DataChanged()" [(ngModel)]="Comment"></textarea>
+                <label for="float-input">Review</label> 
+            </span>
+        </div>
+        <div class="row">
+            <div class="col-md-3 movie-raised-button">
+                <button pButton pRipple type="button" [disabled]="enable" label="Submit" (click)="SubmitReview(movieinfo.Title)" class="p-button-raised"></button>
+            </div>
+        </div>
+    <p-divider></p-divider>
+    </div>
+    <h2>Reviews : {{(reviews).length}}</h2>
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3" *ngFor="let item of reviews">
+            <p-card>
+                <ng-template pTemplate="header">
+                    <div class="row pt-2 pl-2">
+                        <div class="col">
+                            <h6>
+                            <i class="pi pi-user"></i>
+                            {{ item.user}}
+                            </h6>
+                        </div>
+                        <div class="col-md-3">
+                            <i class="pi pi-star-fill" style="color:red"></i>
+                            {{item.rating}}/5
+                        </div>
+                    </div>
+                </ng-template>
+                <h6>{{item.reviews}}</h6>
+                <ng-template pTemplate="footer">
+                    <div class="row">
+                        <!-- <div class="col-md-8">
+                            <input type="text" placeholder="Add Comment"  pInputText />
+                        </div> -->
+                        <div class="col-md-5 movie-raised-button">
+                            <button pButton pRipple type="button" label="Comment" class="p-button-raised" routerLink="/reviews"></button>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</div> 
